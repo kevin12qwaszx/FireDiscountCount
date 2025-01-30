@@ -169,18 +169,22 @@ class AutoTextBot:
                         #colorU
                         # i want to check if it is my color aka my turn, and update the value by and increase by one
                         # location tag
-                        pyautogui.click(x + width / 2, y + 50)
-                        countvalue = int(intdata['Count'])+1
-                        
-                        keyboard.write(str(countvalue))
-                        
-                        keyboard.press_and_release('enter')
-                        pyautogui.moveTo(0, 0)
-                        
-                        doc_ref.update({
-                        'User': str(colorU),
-                        'Count': str(countvalue)
-                                })
+                        # need to check if the other one have stop or not 
+                        if intdata['Stat'] == 'Stop':
+                            stop()
+                        else: 
+                            pyautogui.click(x + width / 2, y + 50)
+                            countvalue = int(intdata['Count'])+1
+                            
+                            keyboard.write(str(countvalue))
+                            
+                            keyboard.press_and_release('enter')
+                            pyautogui.moveTo(0, 0)
+                            
+                            doc_ref.update({
+                            'User': str(colorU),
+                            'Count': str(countvalue)
+                                    })
                         
                         
                     except Exception as e:
